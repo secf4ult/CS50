@@ -1,3 +1,5 @@
+// Print out the bricks in trapezoid with given height
+
 #include <stdio.h>
 #include <cs50.h>
 
