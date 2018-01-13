@@ -92,9 +92,10 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void setTheKey(char *key, char c, int bit)
+void setTheKey(char *key, char c, int n)
 {
-    for (int i = 0; i < bit; i++)
+    // set the string to char c before n-th bit
+    for (int i = 0; i < n; i++)
     {
         key[i] = c;
     }
