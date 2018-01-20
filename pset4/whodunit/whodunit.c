@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "bmp.h"
 
 int main(int argc, char *argv[])
@@ -70,7 +71,14 @@ int main(int argc, char *argv[])
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-            triple.rgbtRed = 0x00;
+            // tweak the RGB bytes
+            triple.rgbtGreen = 0xff;
+            triple.rgbtBlue = 0xff;
+
+            if (triple.rgbtRed != 0xff)
+            {
+                triple.rgbtRed = 0x00;
+            }
 
             // write RGB triple to outfile
             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
