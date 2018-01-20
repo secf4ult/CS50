@@ -2,31 +2,31 @@
 
 ## What's `stdint.h`?
 
-TODO
+`stdint.h` is a header file includes some useful typedefs and specify exact-width integer types.
 
 ## What's the point of using `uint8_t`, `uint32_t`, `int32_t`, and `uint16_t` in a program?
 
-TODO
+it makes the size and signing of the data types clear.
 
 ## How many bytes is a `BYTE`, a `DWORD`, a `LONG`, and a `WORD`, respectively?
 
-TODO
+1, 4, 4, 2.
 
 ## What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
 
-TODO
+0x42 0x4D
 
 ## What's the difference between `bfSize` and `biSize`?
 
-TODO
+`bfSize` is the size of the whole bitmap file while `biSize` is the size of BITMAPINFOHEADER.
 
 ## What does it mean if `biHeight` is negative?
 
-TODO
+the bitmap is a top-down DIB and its origin is the upper-left corner.
 
 ## What field in `BITMAPINFOHEADER` specifies the BMP's color depth (i.e., bits per pixel)?
 
-TODO
+`biBitCount`
 
 ## Why might `fopen` return `NULL` in lines 24 and 32 of `copy.c`?
 
