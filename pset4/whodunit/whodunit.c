@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "bmp.h"
 
 int main(int argc, char *argv[])
 {
@@ -48,5 +49,49 @@ int main(int argc, char *argv[])
         return 4;
     }
 
+    // write outfile's BITMAPFILEHEADER
+    fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
+
+    // write outfile's BITMAPINFOHEADER
+    fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
+
+    // determine padding for scanlines
+    int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+
+    // iterate over infile's scanlines
+    for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+    {
+        // iterate over pixels in scanline
+        for (int j = 0; j < bi.biWidth; j++)
+        {
+            // temporary storage
+            RGBTRIPLE triple;
+
+            // read RGB triple from infile
+            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+            triple.rgbtRed = 0x00;
+
+            // write RGB triple to outfile
+            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+        }
+
+        // skip over padding, if any
+        fseek(inptr, padding, SEEK_CUR);
+
+        // then add it back (to demonstrate how)
+        for (int k = 0; k < padding; k++)
+        {
+            fputc(0x00, outptr);
+        }
+    }
+
+    // close infile
+    fclose(inptr);
+
+    // close outfile
+    fclose(outptr);
+
+    // success
     return 0;
 }
