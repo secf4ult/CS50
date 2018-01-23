@@ -127,47 +127,49 @@ int main(int argc, char *argv[])
     // when factor is a value in (0.0, 1.0)
     else
     {
+        // cast long int to int
+        int s = lroundf(1 / factor);
+
         for (int i = 0, height = abs(old_biHeight); i < height; i++)
         {
-            if ( ceil(i * factor) != ceil((i + 1) * factor) )
+            // take only every s-th row
+            if (i % s == 0)
             {
-                // iterate over each pixel in the width of the infile (original file)
-                for (int j = 0; j < bi.biWidth; j++)
+                // iterate over pixel in scanline
+                for (int j = 0; j < old_biWidth; j++)
                 {
-                    // same as above, but now considering horizontal iteration count
-                    if (ceil(j * factor) != ceil((j + 1) * factor))
+                    // temporary storage
+                    RGBTRIPLE triple;
+
+                    // read RGB triple from infile
+                    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+                    // take only every s-th element
+                    if (j % s == 0)
                     {
-                        // temporary storage for triple
-                        RGBTRIPLE triple;
-
-                        // read one pixel (aka 1 RGBTRIPLE) from the infile
-                        fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-                        // write one pixel to the outfile
                         fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
                     }
+                    // skip over every not-s-th element
                     else
                     {
-                        // skip over 1 pixel
-                        fseek(inptr, sizeof(RGBTRIPLE), SEEK_CUR);
+                        // s - 2, because already read two times before skip
+                        fseek(inptr, (s - 2) * sizeof(RGBTRIPLE), SEEK_CUR);
                     }
                 }
 
-                // skip over the padding in the infile
+                // skip over padding if any in inputfile
                 fseek(inptr, old_padding, SEEK_CUR);
 
-                // add it back to the outfile
+                // add padding to outfile
                 for (int k = 0; k < new_padding; k++)
                 {
-                    fputc(0x00, outptr); // each byte of padding consists of 2 zero's, in hex
+                    fputc(0x00, outptr);
                 }
             }
+            // skip over not-s-th row
             else
             {
-                // skip over 1 horizontal line
-                // line size in bytes is the product of amount of pixels times size of each pixel (3 or size of RGBTRIPLE)
-                // finally add padding, if any exists in the original file
-                fseek(inptr, (sizeof(RGBTRIPLE) * abs(bi.biWidth) + old_padding), SEEK_CUR);
+                fseek(inptr, old_biWidth * sizeof(RGBTRIPLE) + old_padding, SEEK_CUR);
             }
         }
     }
