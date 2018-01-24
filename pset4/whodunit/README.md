@@ -30,20 +30,20 @@ the bitmap is a top-down DIB and its origin is the upper-left corner.
 
 ## Why might `fopen` return `NULL` in lines 24 and 32 of `copy.c`?
 
-TODO
+the file doesn't exist or you don't have the permission
 
 ## Why is the third argument to `fread` always `1` in our code?
 
-TODO
+because we only read it one time
 
 ## What value does line 65 of `copy.c` assign to `padding` if `bi.biWidth` is `3`?
 
-TODO
+3
 
 ## What does `fseek` do?
 
-TODO
+set the file position indicator
 
 ## What is `SEEK_CUR`?
 
-TODO
+the current position indicator
