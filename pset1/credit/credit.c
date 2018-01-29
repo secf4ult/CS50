@@ -8,7 +8,6 @@ int main(void)
     long long number;
     long long numberCpy;
     int checksum = 0;
-    int length = 0;
 
     // get the credit card number
     do
@@ -40,7 +39,6 @@ int main(void)
         checksum += sum;
         number /= 10;
 
-        length++;
         i++;
     }
 
