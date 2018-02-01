@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <form action="/score" method="post">
+      <div class="form-group">
+        <label for="input1">String 1</label>
+        <input name="string1" type="text" class="form-control" placeholder="String">
+      </div>
+      <div class="form-group">
+        <label for="input2">String 2</label>
+        <input name="string2" type="text" class="form-control" placeholder="String">
+      </div>
+      <button type="submit" class="btn btn-primary">Score</button>
+    </form>
+
+{% endblock %}

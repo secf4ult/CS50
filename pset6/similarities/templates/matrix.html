@@ -1,0 +1,37 @@
+<table class="table">
+    <thead>
+      <tr>
+        {% for j in range(s2|length + 3) %}
+          {% if j > 2 %}
+            <th scope="col">{{ s2[j - 3] }}</th>
+          {% else %}
+            <th scope="col"></th>
+          {% endif %}
+        {% endfor %}
+      </tr>
+      <tr>
+        {% for j in range(s2|length + 3) %}
+          {% if j > 1 %}
+            <th scope="col">{{ j - 2 }}</th>
+          {% else %}
+            <th scope="col"></th>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in range(s1|length + 1) %}
+        <tr>
+          {% for j in range(s2|length + 3) %}
+            {% if j == 0 and i > 0 %}
+              <th scope="row">{{ s1[i - 1] }}</th>
+            {% elif j == 1 %}
+              <th scope="row">{{ i }}</th>
+            {% else %}
+              <td>{{ matrix[i][j - 2][0] }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
