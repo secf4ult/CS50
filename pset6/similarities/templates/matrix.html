@@ -23,7 +23,9 @@
       {% for i in range(s1|length + 1) %}
         <tr>
           {% for j in range(s2|length + 3) %}
-            {% if j == 0 and i > 0 %}
+            {% if i == 0 and j == 0 %}
+              <th scope="row"></th>
+            {% elif j == 0 and i > 0 %}
               <th scope="row">{{ s1[i - 1] }}</th>
             {% elif j == 1 %}
               <th scope="row">{{ i }}</th>

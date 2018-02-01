@@ -50,6 +50,6 @@ def distances(a, b):
                              subs,
                              key=lambda x: x[0])
 
-                matrix[i].append((min_op[0], min_op[1]))
+                matrix[i].append(min_op)
 
     return matrix
