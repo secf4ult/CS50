@@ -45,7 +45,10 @@ int isString(string s)
 {
     for (int i = 0; i < strlen(s); i++)
     {
-        if( !isalpha(s[i]) ) return false;
+        if ( !isalpha(s[i]) )
+        {
+            return false;
+        }
     }
 
     return true;

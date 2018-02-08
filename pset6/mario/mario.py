@@ -11,11 +11,11 @@ while True:
 # print pyramid
 for row in range(1, n + 1):
     # print left pyramid
-    print(" " * (n - row), end = "")
-    print("#" * row, end = "")
+    print(" " * (n - row), end="")
+    print("#" * row, end="")
 
     # print spaces
-    print(" " * 2, end = "")
+    print(" " * 2, end="")
 
     # print right pyramid
     print("#" * row)

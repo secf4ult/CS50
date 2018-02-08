@@ -38,11 +38,11 @@ def distances(a, b):
                 # insertion: cost[i][j - 1] + 1
                 inse = (matrix[i][j - 1][0] + 1, Operation.INSERTED)
                 # substitution:
-                    # cost[i - 1][j - 1] if i-th char of a is j-th char of b
-                    # cost[i - 1][j - 1] + 1 otherwise
                 if a[i - 1] == b[j - 1]:
+                    # cost[i - 1][j - 1] if i-th char of a is j-th char of b
                     subs = (matrix[i - 1][j - 1][0], Operation.SUBSTITUTED)
                 else:
+                    # cost[i - 1][j - 1] + 1 otherwise
                     subs = (matrix[i - 1][j - 1][0] + 1, Operation.SUBSTITUTED)
 
                 min_op = min(dele,
