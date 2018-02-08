@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" method="POST">
+        <div class="form-group">
+            <label for="stock">Stock symbol:</label>
+            <input autofocus name="symbol" class="form-control" type="text" placeholder="Stock symbol">
+        </div>
+        <div class="form-group">
+            <label for="shares">Number of shares:</label>
+            <input name="shares" class="form-control" type="text" placeholder="Number of shares">
+        </div>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>
+
+    <!-- if passed in valid stock name, display -->
+    {% if quote %}
+    <div>
+        <p>A share of {{ quote.name }} ({{ quote.symbol }}) costs ${{ quote.price }}.</p>
+    </div>
+    {% endif %}
+{% endblock %}
