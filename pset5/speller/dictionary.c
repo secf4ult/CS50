@@ -76,6 +76,7 @@ bool load(const char *dictionary)
     {
         int index = 0;
         node *trav = root;
+
         // Each element in children corresponds to a different letter
         for (int i = 0; word[i] != '\0'; i++)
         {
@@ -134,6 +135,7 @@ bool unload(void)
 {
     // Successful unload
     unload_node(root);
+
     return true;
 }
 
