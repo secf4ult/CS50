@@ -20,7 +20,7 @@
     <!-- if passed in valid stock name, display -->
     {% if quote %}
     <div>
-        <p>A share of {{ quote.name }} ({{ quote.symbol }}) costs ${{ quote.price }}.</p>
+        <p>A share of {{ quote.name }} ({{ quote.symbol }}) costs ${{ quote.price|usd }}.</p>
     </div>
     {% endif %}
 {% endblock %}

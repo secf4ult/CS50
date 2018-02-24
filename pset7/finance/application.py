@@ -77,18 +77,29 @@ def buy():
 
         # Get stock name and shares from form
         stock = lookup(request.form.get("symbol"))
-        shares = int(request.form.get("shares"))
+        # Ensure stock symbol was submitted and valid
+        if not stock:
+            return apology("must provide valid symbol")
+
+        shares = request.form.get("shares")
+        # Shares can't be float
+        if "." in shares:
+            return apology("shares must be positive integer")
+
+        # Cast string to int
+        try:
+            shares = int(shares)
+        except:
+            return apology("shares must be positive integer")
+
+        # Ensure shares was positive integer
+        if not isinstance(shares, int) or shares < 1:
+            return apology("shares must be positive integer")
+
         # Get symbol, price, total_value
         symbol = stock["symbol"]
         price = stock["price"]
         user_id = session["user_id"]
-
-        # Ensure stock symbol was submitted and valid
-        if not stock:
-            return apology("must provide valid symbol", 403)
-        # Ensure shares was submitted
-        elif shares < 1:
-            return apology("shares must be positive integer", 403)
 
         # Query database for current user's cash
         cash = db.execute("SELECT cash \
@@ -130,7 +141,6 @@ def buy():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("buy.html")
-
 
 @app.route("/history")
 @login_required
